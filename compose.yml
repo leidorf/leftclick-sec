@@ -1,0 +1,46 @@
+services:
+
+  frontend:
+    container_name: next
+    build:
+      context: ./frontend
+      dockerfile: next.dockerfile
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules 
+    environment:
+      - NODE_ENV=development 
+    ports:
+      - "3000:3000"
+    command: npm run dev
+
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: backend.dockerfile
+    volumes:
+      - ./backend:/app
+    environment:
+      - NODE_ENV=development
+    ports:
+      - "8000:8000"
+    command: uvicorn main:app --host 0.0.0.0 --reload
+
+  db:
+    container_name: db
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_ALLOW_EMPTY_PASSWORD=0
+    ports:
+      - 3306:3306
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data: 
+  
