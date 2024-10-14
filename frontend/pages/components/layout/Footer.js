@@ -4,31 +4,36 @@ import React from "react";
 const Footer = () => {
   return (
     <>
-      <div className="container">
-        <footer className="d-flex py-3 border-top">
-          <div className="me-auto d-flex align-items-center">
-
-            <div className="text-white-50">
-              <span className="copyleft me-1">🄯</span>
-              2024 leidorf ☭
-            </div>
+      <footer className="text-xs leading-6 mt-12 text-gray-500">
+        <div className="pt-10 pb-20 border-t border-slate-200/5 flex justify-around">
+          <div className="flex">
+            <p>copyleft 🄯 2024 leidorf ☭</p>
+            <p className="border-l border-slate-200/5 sm:ml-4 sm:pl-4">
+              <Link
+                href="../../privacy.js"
+                className="hover:text-gray-300"
+              >
+                Privacy Policy
+              </Link>
+            </p>
           </div>
 
           {/* github */}
-          <div className="d-flex align-items-center">
+          <div>
             <Link
-              className="text-body-secondary d-flex align-items-center"
+              className="hover:text-gray-300"
               href="https://github.com/leidorf"
               target="_blank"
             >
-              <img
+              GitHub
+              {/* <img
                 src="/imgs/github-logo.png"
-                style={{width: "1rem"}}
-              />
+                style={{ width: "1rem" }}
+                /> */}
             </Link>
           </div>
-        </footer>
-      </div>
+        </div>
+      </footer>
     </>
   );
 };

@@ -1,11 +1,13 @@
 import Link from "next/link";
 import React from "react";
 import Layout from "./components/layout/Layout";
+import PageHead from "./components/layout/PageHead";
 
 const About = () => {
   return (
     <>
       <Layout>
+      <PageHead headTitle="About | LeftClick Sec"></PageHead>
         <section className="section">
           <div className="container col text-center">
             <ul className="list-unstyled d-flex mt-5">
