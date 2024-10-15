@@ -10,7 +10,7 @@ const Footer = () => {
             <p>copyleft 🄯 2024 leidorf ☭</p>
             <p className="border-l border-slate-200/5 sm:ml-4 sm:pl-4">
               <Link
-                href="../../privacy.js"
+                href="../../privacy"
                 className="hover:text-gray-300"
               >
                 Privacy Policy
@@ -22,7 +22,7 @@ const Footer = () => {
           <div>
             <Link
               className="hover:text-gray-300"
-              href="https://github.com/leidorf"
+              href="https://github.com/leidorf/leftclick-sec"
               target="_blank"
             >
               GitHub

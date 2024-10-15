@@ -7,30 +7,28 @@ const About = () => {
   return (
     <>
       <Layout>
-      <PageHead headTitle="About | LeftClick Sec"></PageHead>
-        <section className="section">
-          <div className="container col text-center">
-            <ul className="list-unstyled d-flex mt-5">
-              <li className="col">
+        <PageHead headTitle="About | LeftClick Sec"></PageHead>
+        <div className="flex justify-around ml-28">
+          <div className="text-2xl">
+            <h1 className="text-4xl">About LeftClick Sec</h1>
+            <div className="border-t pt-4 mt-4 border-slate-200/5 max-w-xl">
+              <p>What is LeftClick Sec?</p>
+              <p className="text-sm mt-2">LeftClick Sec is a lightweight, anonymous, machine learning based URL fishing scanner under GPLv3 and copyleft license.</p>
+              <p className="mt-8">How LeftClick Sec is anonymous?</p>
+              <p className="text-sm mt-2">
+                LeftClick Sec does <span className="text-red-600">NOT</span> collect, share and distrubate any user data. You can check more about in{" "}
                 <Link
-                  href="https://github.com/leidorf"
-                  className="text-info nav-link mb-4"
+                  href="./privacy.js"
+                  className="underline underline-offset-2 decoration-2 decoration-red-800"
                 >
-                  <img
-                    alt="güray dağ"
-                    style={{ width: "25rem" }}
-                    src="https://avatars.githubusercontent.com/u/93585259?v=4"
-                  ></img>
+                  privacy policy
                 </Link>
-                <p className="text-light h5">
-                  güray dağ <br />
-                  (me)
-                </p>
-              </li>
-            </ul>
-            <p className="text-white-50">i am interested in cybersecurity, most forms of art, anatolia, foss, linux, botanic.</p>
+                .
+              </p>
+            </div>
           </div>
-        </section>
+          <div></div>
+        </div>
       </Layout>
     </>
   );
