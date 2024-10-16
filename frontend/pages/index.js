@@ -5,10 +5,29 @@ import React, { useState } from "react";
 
 export default function Home() {
   const [url, setUrl] = useState("");
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitted URL: ", url);
+    setError(null);
+    setResult(null);
+
+    try {
+      const urlObj = new URL(url);
+      const domain = urlObj.hostname;
+
+      const response = await fetch(`/api/check-url?q=${encodeURIComponent(domain)}`);
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      setResult(data);
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   return (
@@ -52,9 +71,28 @@ export default function Home() {
               Check
             </button>
           </form>
+          {result && (
+            <div className="mt-4">
+              <h3 className="text-xl">Results:</h3>
+              <pre className="bg-gray-100 p-2 rounded">{JSON.stringify(result, null, 2)}</pre>
+            </div>
+          )}
+
+          {error && (
+            <div className="mt-4 text-red-500">
+              <p>{error}</p>
+            </div>
+          )}
           <p className="border-t border-slate-200/5 mt-4 pt-4 text-xs text-gray-500 mt-8 text-pretty max-w-2xl mx-auto">
-            By submitting data above, you are agreeing to our Terms of Service and <Link href="./privacy.js" className="text-slate-400">Privacy Policy</Link>, and to the sharing of your URL submission with the security
-            community. Please do not submit any personal information; we are not responsible for the contents of your submission. Learn more.
+            By submitting data above, you are agreeing to our Terms of Service and
+            <Link
+              href="./privacy.js"
+              className="text-slate-400"
+            >
+              Privacy Policy
+            </Link>
+            , and to the sharing of your URL submission with the security community. Please do not submit any personal information; we are not responsible for the contents of your submission. Learn
+            more.
           </p>
         </div>
       </Layout>
