@@ -14,8 +14,13 @@ export default function Home() {
     setResult(null);
 
     try {
-      const urlObj = new URL(url);
-      const domain = urlObj.hostname;
+      let domain;
+      try {
+        const urlObj = new URL(url);
+        domain = urlObj.hostname;
+      } catch (err) {
+        domain = url;
+      }
 
       const response = await fetch(`/api/check-url?q=${encodeURIComponent(domain)}`);
 
@@ -55,7 +60,7 @@ export default function Home() {
                 Enter a URL:
               </label> */}
               <input
-                type="url"
+                type="text"
                 id="url"
                 className="border border-slate-300 text-black w-1/4 rounded py-1 px-2 focus:outline-none focus:border-purple-800 focus:ring-purple-800 focus:ring-1 sm:text-sm "
                 value={url}
@@ -74,7 +79,23 @@ export default function Home() {
           {result && (
             <div className="mt-4">
               <h3 className="text-xl">Results:</h3>
-              <pre className="bg-gray-100 p-2 rounded">{JSON.stringify(result, null, 2)}</pre>
+              <div className="p-2 rounded capitalize">
+                {result.message ? (
+                  <p>{result.message}</p>
+                ) : (
+                  <p className="text-red-600">
+                    <Link
+                      className="underline"
+                      target="_blank"
+                      href={`https://www.usom.gov.tr/adres/${result.data.id}`}
+                    >
+                      {result.result}
+                    </Link>
+                    <br />
+                    CVSS: {result.data.criticality_level}
+                  </p>
+                )}
+              </div>
             </div>
           )}
 
@@ -83,16 +104,15 @@ export default function Home() {
               <p>{error}</p>
             </div>
           )}
-          <p className="border-t border-slate-200/5 mt-4 pt-4 text-xs text-gray-500 mt-8 text-pretty max-w-2xl mx-auto">
-            By submitting data above, you are agreeing to our Terms of Service and
+          <p className="border-t border-slate-200/5 mt-4 pt-4 text-xs text-gray-500 mt-8 text-pretty max-w-xl mx-auto">
+            By submitting data above, you are agreeing to our Terms of Service and{" "}
             <Link
               href="./privacy.js"
               className="text-slate-400"
             >
               Privacy Policy
             </Link>
-            , and to the sharing of your URL submission with the security community. Please do not submit any personal information; we are not responsible for the contents of your submission. Learn
-            more.
+            . Please do not submit any personal information; we are not responsible for the contents of your submission. Learn more.
           </p>
         </div>
       </Layout>
