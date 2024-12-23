@@ -10,17 +10,16 @@ const AddOn = () => {
         <PageHead headTitle="Add-on | LeftClick Sec"></PageHead>
         <div className="container mx-auto text-center">
           <h1 className="text-4xl">Add-on</h1>
-          <p className="text-xs mt-4">
+          <p className="text-sm mt-4">
             LeftClick Sec is a browser extension too!
             <br />
             You can download it as an extension for your browser from the links below.
           </p>
-          <div className="border-t pt-4 mt-4 border-slate-200/25 mx-96"></div>
-          <ul className="flex space-x-36 justify-center">
+          <ul className="flex space-x-36 mt-8 text-xl font-medium justify-center">
             <li>
               <Link
                 href=""
-                className="p-1 rounded bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+                className="text-yellow-500"
               >
                 Chrome
               </Link>
@@ -28,7 +27,7 @@ const AddOn = () => {
             <li>
               <Link
                 href=""
-                className="p-1 rounded bg-gradient-to-r from-pink-500 to-orange-500"
+                className=" text-orange-600"
               >
                 Firefox
               </Link>

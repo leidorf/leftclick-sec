@@ -8,10 +8,14 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <PageHead />
-      <Header />
-      <main className="main">{children}</main>
-      <Footer />
+      <div className="flex justify-center">
+        <div className="w-8/12">
+          <PageHead />
+          <Header />
+          <main className="main">{children}</main>
+          <Footer />
+        </div>
+      </div>
     </>
   );
 };

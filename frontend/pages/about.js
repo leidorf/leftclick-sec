@@ -8,18 +8,31 @@ const About = () => {
     <>
       <Layout>
         <PageHead headTitle="About | LeftClick Sec"></PageHead>
-        <div className="flex justify-around ml-28">
+        <div className="">
           <div className="text-2xl">
             <h1 className="text-4xl">About LeftClick Sec</h1>
-            <div className="border-t pt-4 mt-4 border-slate-200/5 max-w-xl">
+            <div className="border-t pt-4 mt-4 border-slate-200/50 max-w-sm"></div>
+            <div>
               <p>What is LeftClick Sec?</p>
-              <p className="text-sm mt-2">LeftClick Sec is a lightweight, anonymous, machine learning based URL fishing scanner under GPLv3 and copyleft license.</p>
+              <p className="text-sm mt-2">
+                LeftClick Sec is a lightweight, anonymous, machine learning based URL fishing scanner under GPLv3 and copyleft
+                license. You can check the source code on{" "}
+                <Link
+                  href="https://github.com/leidorf/leftclick-sec"
+                  target="_blank"
+                  className="red-underline"
+                >
+                  GitHub
+                </Link>
+                .
+              </p>
               <p className="mt-8">How LeftClick Sec is anonymous?</p>
               <p className="text-sm mt-2">
-                LeftClick Sec does <span className="text-red-600">NOT</span> collect, share and distrubate any user data. You can check more about in{" "}
+                LeftClick Sec does <span className="text-red-600 font-bold">NOT</span> collect, share or distrubate any user data. You can
+                check more about in{" "}
                 <Link
-                  href="./privacy.js"
-                  className="underline underline-offset-2 decoration-2 decoration-red-800"
+                  href="privacy"
+                  className="red-underline"
                 >
                   privacy policy
                 </Link>
