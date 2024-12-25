@@ -7,11 +7,9 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #111111;
-    --foreground: #e0e0e0;
-  }
+.dark {
+  --background: #111111;
+  --foreground: #e0e0e0;
 }
 
 body {
@@ -26,7 +24,7 @@ body {
   }
 }
 
-.header-item{
+.header-item {
   @apply tracking-normal hover:tracking-wider transition-all duration-300 ease-in-out;
 }
 
@@ -37,6 +35,10 @@ body {
   border-radius: 50%;
 }
 
-.red-underline{
-  @apply underline underline-offset-2 decoration-2 decoration-red-800;
+.red-underline {
+  @apply underline underline-offset-2 decoration-2 decoration-red-400 dark:decoration-red-800;
+}
+
+.header-hamburger{
+  @apply block p-2  hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded;
 }

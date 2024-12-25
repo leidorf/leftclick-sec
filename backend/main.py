@@ -96,9 +96,12 @@ async def check_url_or_db(q: str):
             )
 
             if suspicious_entry:
-                return {"result": "suspicious", "source": "API", "data": suspicious_entry}
-
-            logging.info("Domain not found in USOM API. Falling back to database.")
+                return {"result": "suspicious",
+                        "source": "API",
+                        "data": suspicious_entry,
+                        "domain": domain,
+                        "current":"USOM",
+                        "progress":[""]}
             
         # Step 2: Check the whitelist
         logging.info(f"Checking whitelist for domain: {root_domain}")
@@ -108,9 +111,12 @@ async def check_url_or_db(q: str):
             if whitelist_result.scalar():
                 return {
                     "result": "whitelisted",
+                    "source": "whitelist",
                     "message": "The root domain is in the whitelist and considered safe.",
-                    "domain": root_domain
-                }
+                    "domain": root_domain,
+                    "current": "Whitelist",
+                    "progress": ["Checked USOM - not found"]
+                }  
 
         # Step 3: Fallback to the local database
         async with async_session() as session:
@@ -120,7 +126,15 @@ async def check_url_or_db(q: str):
 
             if rows:
                 result_data = [dict(row) for row in rows]
-                return {"result": "suspicious", "source": "Database", "data": result_data}
+                return {"result": "suspicious",
+                        "source": "Blacklist Database",
+                        "data": result_data,
+                        "message": "The link is in the blacklist and considered suspicious.",
+                        "domain": domain,
+                        "current": "Blacklist",
+                        "progress": ["Checked USOM - not found",
+                                     "Checked whitelist - not found"]
+                        }
             
         # Step 4: Use the model prediction
         prediction_result = predict(domain)
@@ -141,7 +155,11 @@ async def check_url_or_db(q: str):
                 "phishing_score": phishing_score,
                 "risk_level": risk_level,
                 "domain": domain
-            }
+            },
+            "current":"Prediction Model",
+            "progress":["Checked USOM - not found",
+                        "Checked whitelist - not found",
+                        "Checked blacklist - not found"]
         }
 
     except Exception as e:
