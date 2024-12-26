@@ -34,7 +34,7 @@ const Header = () => {
   };
 
   return (
-    <div className="sticky mb-8 font-bold">
+    <div className="sticky mb-8 font-bold min-w-52">
       <div
         className="py-5 border-b border-neutral-300 dark:border-neutral-200/5  relative flex justify-between
                       text-neutral-800 dark:text-neutral-300"

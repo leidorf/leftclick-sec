@@ -162,15 +162,16 @@ export default function Home() {
                     </div>
                   )}
 
-                  {result.result === "suspicious" && result.source === "Database" && (
+                  {result.result === "suspicious" && result.source === "Blacklist" && (
                     <div className="text-red-600">
                       <p>
                         ⚠️
                         <br />
-                        <strong>{result.domain}</strong> is flagged as suspicious.
+                        <strong>{result.domain}</strong>
+                        <br /> is flagged as suspicious.
                       </p>
                       <p>
-                        <span className="font-bold">Source:</span> Local Database
+                        <span className="font-bold">Source:</span> Local Blacklist
                       </p>
                       {result.data.map((entry, index) => (
                         <p key={index}>

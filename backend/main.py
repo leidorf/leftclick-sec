@@ -123,18 +123,24 @@ async def check_url_or_db(q: str):
             db_query = "SELECT * FROM suspicious_domains WHERE domain = :domain"
             db_result = await session.execute(text(db_query), {"domain": domain})
             rows = db_result.fetchall()
-
+            
             if rows:
-                result_data = [dict(row) for row in rows]
-                return {"result": "suspicious",
-                        "source": "Blacklist Database",
-                        "data": result_data,
-                        "message": "The link is in the blacklist and considered suspicious.",
-                        "domain": domain,
-                        "current": "Blacklist",
-                        "progress": ["Checked USOM - not found",
-                                     "Checked whitelist - not found"]
-                        }
+                results = [
+                    {"id": row[0], "domain": row[1], "reason": row[2], "date_added": row[3]} 
+                    for row in rows
+                ]
+                return {
+                    "result": "suspicious",
+                    "source": "Blacklist",
+                    "data": results,
+                    "message": "The link is in the blacklist and considered suspicious.",
+                    "domain": domain,
+                    "current": "Blacklist",
+                    "progress": [
+                        "Checked USOM - not found",
+                        "Checked whitelist - not found"
+                    ]
+                }
             
         # Step 4: Use the model prediction
         prediction_result = predict(domain)
@@ -147,7 +153,14 @@ async def check_url_or_db(q: str):
             risk_level = "Caution"
         else:
             risk_level = "High Risk"
-
+            
+        if phishing_score >= 50:
+            async with async_session() as session:
+                db_query = "INSERT INTO suspicious_domains (domain, reason, date_added) VALUES (:domain, :reason, NOW())"
+                reason = f"The link considered {str(risk_level)} (%{phishing_score:.2f}) by ML model"                
+                params = {"domain":domain, "reason":reason}
+                db_result = await session.execute(text(db_query),params)
+                await session.commit()
         return {
             "result": risk_level,
             "source": "Model",
