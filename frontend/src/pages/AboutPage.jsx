@@ -3,7 +3,7 @@ import React from "react";
 import Layout from "./components/layout/Layout";
 import PageHead from "./components/layout/PageHead";
 
-const About = () => {
+const AboutPage = () => {
   return (
     <>
       <Layout>
@@ -44,4 +44,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default AboutPage;

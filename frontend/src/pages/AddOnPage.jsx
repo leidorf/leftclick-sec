@@ -3,7 +3,7 @@ import React from "react";
 import Layout from "./components/layout/Layout";
 import PageHead from "./components/layout/PageHead";
 
-const AddOn = () => {
+const AddOnPage = () => {
   return (
     <>
       <Layout>
@@ -50,4 +50,4 @@ const AddOn = () => {
   );
 };
 
-export default AddOn;
+export default AddOnPage;
