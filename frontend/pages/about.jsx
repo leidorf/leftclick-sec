@@ -27,7 +27,7 @@ const About = () => {
             </p>
             <p className="mt-8">How LeftClick Sec is anonymous?</p>
             <p className="text-sm mt-2">
-              LeftClick Sec does <span className="text-red-600 font-bold">NOT</span> collect, share or distrubate any user data.
+              LeftClick Sec does <span className="text-red-600 font-bold">NOT</span> collect, share or distribute any user data.
               You can check more about in{" "}
               <Link
                 href="privacy"
