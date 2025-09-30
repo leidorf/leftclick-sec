@@ -1,0 +1,60 @@
+version: '3.9'
+
+services:
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: dev.Dockerfile
+    restart: on-failure
+    depends_on:
+      postgres:
+       condition: 'service_healthy'
+    networks:
+      - phish
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: phishing-postgres
+    environment:
+      POSTGRES_DB: bootcamp2025
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      PGUSER: postgres
+    restart: on-failure
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    networks:
+      - phish
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d bootcamp2025"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: dev.Dockerfile
+    container_name: phishing-nginx
+    restart: on-failure
+    ports:
+      - 80:80
+    networks:
+      - phish
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: dev.Dockerfile
+    restart: on-failure
+    networks:
+      - phish
+
+
+networks:
+  phish:
+    driver: bridge
+
+volumes:
+  postgres_data:

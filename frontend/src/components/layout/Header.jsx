@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const Header = () => {
@@ -10,6 +10,7 @@ const Header = () => {
   };
 
   useEffect(() => {
+    localStorage.setItem("theme", "dark");
     const storedTheme = localStorage.getItem("theme");
     if (storedTheme === "dark") {
       document.documentElement.classList.add("dark");
@@ -35,21 +36,15 @@ const Header = () => {
   return (
     <div className="sticky mb-8 font-bold min-w-52">
       <div
-        className="py-5 border-b border-neutral-300 dark:border-neutral-200/5  relative flex justify-between
+        className="py-5 border-b border-neutral-300 dark:border-neutral-200/5 relative flex justify-between items-center
                       text-neutral-800 dark:text-neutral-300"
       >
-        <div className="flex items-center space-x-2">
-          <Link href="/">
-            <div className="flex items-center">
-              <img
-                src="/imgs/logo.png"
-                alt="Logo"
-                className="h-6 w-6"
-              />
-              <p className="ml-2 text-2xl font-light">LeftClick Sec</p>
-            </div>
-          </Link>
-        </div>
+        <Link to="/" className="flex items-center space-x-2">
+          <img src="/images/logo.png" alt="Logo" className="h-6 w-6" />
+          <p className="text-2xl font-light leading-none -mb-1">
+            LeftClick Sec
+          </p>
+        </Link>
         <button
           className="block sm:hidden text-2xl font-extralight"
           onClick={toggleMenu}
@@ -57,27 +52,21 @@ const Header = () => {
         >
           ☰
         </button>
-        <ul className="hidden sm:flex items-center space-x-10">
+        <ul className="hidden sm:flex items-baseline space-x-10">
           <li>
-            <Link
-              href="/add-on"
-              className="header-item"
-            >
+            <Link to="/add-on" className="header-item">
               Add-on
             </Link>
           </li>
           <li>
-            <Link
-              href="/about"
-              className="header-item"
-            >
+            <Link to="/about" className="header-item">
               About
             </Link>
           </li>
           <li>
             <button
               onClick={toggleTheme}
-              className="px-3 py-2 text-sm font-semibold rounded-lg
+              className="p-2 pb-1.5  w-10 text-sm font-semibold rounded-lg
                        border border-neutral-300 dark:border-neutral-800
                        dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800
                        transition-all ml-auto"
@@ -92,16 +81,16 @@ const Header = () => {
           <li>
             <Link
               className="header-hamburger"
-              href={"/"}
+              to="/"
               onClick={() => setMenuOpen(false)}
             >
-              Home Page
+              Check
             </Link>
           </li>
           <li>
             <Link
               className="header-hamburger"
-              href={"/add-on"}
+              to="/add-on"
               onClick={() => setMenuOpen(false)}
             >
               Add-on
@@ -110,17 +99,14 @@ const Header = () => {
           <li>
             <Link
               className="header-hamburger"
-              href={"/about"}
+              to="/about"
               onClick={() => setMenuOpen(false)}
             >
               About
             </Link>
           </li>
           <li>
-            <button
-              onClick={toggleTheme}
-              className="block p-2 w-full"
-            >
+            <button onClick={toggleTheme} className="block p-2 w-full">
               {isDark ? "❨" : "☀︎"}
             </button>
           </li>

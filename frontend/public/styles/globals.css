@@ -39,6 +39,6 @@ body {
   @apply underline underline-offset-2 decoration-2 decoration-red-400 dark:decoration-red-800;
 }
 
-.header-hamburger {
+.header-hamburger{
   @apply block p-2  hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded;
 }

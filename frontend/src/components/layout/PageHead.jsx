@@ -1,14 +1,10 @@
-import React from "react";
-import Head from "next/head";
+import { Helmet } from "react-helmet-async";
 
 const PageHead = ({ headTitle }) => {
   return (
-    <>
-      <Head>
-        <title>{headTitle ? headTitle : "LeftClick Sec"}</title>
-        <link rel="icon" href="../../favicon.ico" />
-      </Head>
-    </>
+    <Helmet>
+      <title>{headTitle}</title>
+    </Helmet>
   );
 };
 

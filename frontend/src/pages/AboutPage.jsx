@@ -1,7 +1,6 @@
-import Link from "next/link";
-import React from "react";
-import Layout from "./components/layout/Layout";
-import PageHead from "./components/layout/PageHead";
+import { Link } from "react-router-dom";
+import Layout from "../components/layout/Layout";
+import PageHead from "../components/layout/PageHead";
 
 const AboutPage = () => {
   return (
@@ -14,10 +13,11 @@ const AboutPage = () => {
           <div>
             <p>What is LeftClick Sec?</p>
             <p className="text-sm mt-2">
-              LeftClick Sec is a lightweight, anonymous, machine learning based URL fishing scanner under GPLv3 and copyleft
-              license. You can check the source code on{" "}
+              LeftClick Sec is a lightweight, anonymous URL phishing scanner
+              based on machine learning and released under the GPLv3 licence.
+              You can view the source code on{" "}
               <Link
-                href="https://github.com/leidorf/leftclick-sec"
+                to="https://github.com/leidorf/leftclick-sec"
                 target="_blank"
                 className="red-underline"
               >
@@ -27,12 +27,10 @@ const AboutPage = () => {
             </p>
             <p className="mt-8">How LeftClick Sec is anonymous?</p>
             <p className="text-sm mt-2">
-              LeftClick Sec does <span className="text-red-600 font-bold">NOT</span> collect, share or distrubate any user data.
-              You can check more about in{" "}
-              <Link
-                href="privacy"
-                className="red-underline"
-              >
+              LeftClick Sec does{" "}
+              <span className="text-red-600 font-bold">NOT</span> collect, share
+              or distribute any user data. You can find out more in the{" "}
+              <Link to="/privacy" className="red-underline">
                 privacy policy
               </Link>
               .

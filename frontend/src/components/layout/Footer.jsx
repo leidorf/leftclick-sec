@@ -1,5 +1,4 @@
-import Link from "next/link";
-import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -10,19 +9,20 @@ const Footer = () => {
             <li>
               <Link
                 className="hover:text-neutral-700 dark:hover:text-neutral-300 flex items-center"
-                href="/"
+                to="/"
               >
                 <img
-                  src="/imgs/logo.png"
+                  src="/images/logo.png"
+                  alt="LeftClick Sec Logo"
                   className="w-4 h-4"
                 />
                 LeftClick Sec
               </Link>
-              <p>copyleft 🄯 2024</p>
+              <p>copyleft 🄯 {new Date().getFullYear()}</p>
             </li>
             <li className="sm:border-l sm:border-neutral-300 sm:dark:border-neutral-200/5 sm:pl-4">
               <Link
-                href="privacy"
+                to="/privacy"
                 className="hover:text-neutral-700 dark:hover:text-neutral-300"
               >
                 Privacy Policy
@@ -31,7 +31,7 @@ const Footer = () => {
             <li>
               <Link
                 className="hover:text-neutral-700 dark:hover:text-neutral-300"
-                href={`add-on`}
+                to="/add-on"
               >
                 Add-on
               </Link>
@@ -39,19 +39,17 @@ const Footer = () => {
             <li>
               <Link
                 className="hover:text-neutral-700 dark:hover:text-neutral-300"
-                href={`about`}
+                to="/about"
               >
                 About
               </Link>
             </li>
           </ul>
 
-          <Link
-            href="https://github.com/leidorf/leftclick-sec"
-            target="_blank"
-          >
+          <Link to="https://github.com/leidorf/leftclick-sec" target="_blank">
             <img
-              src="/imgs/github-logo.png"
+              src="/images/github-logo.png"
+              alt="GitHub Logo"
               className="w-4 h-auto invert dark:invert-0"
             />
           </Link>
