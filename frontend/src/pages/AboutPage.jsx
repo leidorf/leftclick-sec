@@ -6,7 +6,7 @@ const AboutPage = () => {
   return (
     <>
       <Layout>
-        <PageHead headTitle="About | LeftClick Sec"></PageHead>
+        <PageHead headTitle="About - LeftClick Sec"></PageHead>
         <div className="text-2xl max-w-xl min-w-60">
           <h1 className="text-4xl">About LeftClick Sec</h1>
           <div className="border-t pt-4 mt-4 border-neutral-300 dark:border-neutral-200/10 max-w-sm"></div>

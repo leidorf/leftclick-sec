@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <Layout>
-        <PageHead headTitle="Home | LeftClick Sec"></PageHead>
+        <PageHead headTitle="Check - LeftClick Sec"></PageHead>
         <div className="container mx-auto text-center">
           <h1 className="text-4xl text-nowrap">LeftClick Sec</h1>
           <p className="text-sm mt-6 text-pretty w-1/5 min-w-48 sm:w-1/5 md:w-1/3 lg:w-1/2 mx-auto">
@@ -32,6 +32,7 @@ export default function Home() {
                 className="border border-neutral-300 dark:border-gray-600 bg-transparent text-sm leading-normal rounded py-1 px-2
                 hover:ring-red-600 hover:ring-1 transition ease-in-out duration-500
                 focus:outline-none focus:ring-red-600 focus:ring-1
+                dark:hover:ring-white
                 w-48 sm:w-48 lg:w-72 shadow-md"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
@@ -42,7 +43,10 @@ export default function Home() {
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="relative mt-4 px-4 py-1.5 rounded transition ease-in-out hover:scale-105 duration-500 dark:bg-red-700 border border-red-700 text-red-700 dark:text-white shadow-lg text-sm flex items-center justify-center"
+                className="relative mt-4 px-4 py-1.5 rounded shadow-lg flex items-center justify-center border 
+                border-red-700 text-red-700 text-sm hover:bg-red-700 hover:text-white
+                transition ease-in-out hover:scale-105 duration-500 
+                dark:bg-red-700 dark:text-white dark:hover:border-white dark:hover:bg-transparent"
               >
                 {checking ? (
                   <>

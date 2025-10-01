@@ -5,7 +5,7 @@ import PageHead from "../components/layout/PageHead";
 const NotFoundPage = () => {
   return (
     <>
-      <PageHead headTitle="404 | LeftClick Sec"></PageHead>
+      <PageHead headTitle="404 - LeftClick Sec"></PageHead>
       <Layout>
         <div className="container mx-auto text-center min-w-48">
           <h1 className="text-9xl font-semibold  text-red-500 dark:text-red-700 mb-8">

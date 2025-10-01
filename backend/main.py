@@ -65,14 +65,15 @@ async def startup_event():
 def read_root():
     return {"message": "LeftClick Sec Backend is Running"}
 
-@app.get("/check")
-async def check_url_or_db(q: str):
+@app.post("/check")
+async def check_url_or_db(request: URLRequest):
     """
     Check the URL against the whitelist, external API, and database.
     If not found, fallback to the model prediction.
     """
     try:
         # Parse the URL and extract the domain
+        q = request.url
         parsed_url = urlparse(q)
         domain = parsed_url.netloc if parsed_url.netloc else parsed_url.path
         root_domain = get_root_domain(parsed_url.netloc if parsed_url.netloc else parsed_url.path)

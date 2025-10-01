@@ -1,0 +1,19 @@
+{
+  "messages": {
+    "error": {
+      "ERR_INVALID_URL": "Geçersiz URL formatı.",
+      "ERR_NETWORK": "Ağ hatası oluştu. Lütfen bağlantınızı kontrol edin.",
+      "ERR_SERVER": "Sunucu hatası oluştu. Lütfen daha sonra tekrar deneyin.",
+      "ERR_URL_CHECK_FAILED": "URL kontrolü başarısız oldu.",
+      "ERR_EMPTY_URL": "Lütfen bir URL girin."
+    },
+    "success": {
+      "URL_SAFE": "URL güvenli görünüyor.",
+      "URL_CHECK_COMPLETED": "URL kontrolü tamamlandı."
+    },
+    "warning": {
+      "URL_SUSPICIOUS": "URL şüpheli görünüyor. Dikkatli olun.",
+      "URL_MALICIOUS": "URL kötü amaçlı olarak işaretlenmiş!"
+    }
+  }
+}

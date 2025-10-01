@@ -6,7 +6,7 @@ const PrivacyPage = () => {
   return (
     <>
       <Layout>
-        <PageHead headTitle="Privacy | LeftClick Sec"></PageHead>
+        <PageHead headTitle="Privacy - LeftClick Sec"></PageHead>
         <div className="">
           <div className="text-pretty max-w-2xl min-w-60">
             <h1 className="text-4xl">Privacy Policy</h1>

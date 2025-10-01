@@ -1,4 +1,4 @@
-import messages from '../locales/tr/common.json';
+import messages from '../locales/common.json';
 
 export function translate(key, status) {
   const group = messages.messages[status];

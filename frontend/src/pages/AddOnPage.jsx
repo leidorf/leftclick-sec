@@ -6,7 +6,7 @@ const AddOnPage = () => {
   return (
     <>
       <Layout>
-        <PageHead headTitle="Add-on | LeftClick Sec"></PageHead>
+        <PageHead headTitle="Add-on - LeftClick Sec"></PageHead>
         <div className="text-center min-w-48">
           <h1 className="text-4xl">Add-on</h1>
           <p className="text-sm mt-4 mb-10 whitespace-pre-line">
