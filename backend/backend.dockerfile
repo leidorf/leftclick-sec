@@ -1,8 +1,15 @@
 # Use Python 3.11 as the base image
-FROM python:3.11
+FROM python:3.11-slim
 
 # Set the working directory inside the container
 WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    default-libmysqlclient-dev \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install the required packages
 COPY requirements.txt .

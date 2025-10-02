@@ -2,7 +2,7 @@ import axios from "axios";
 import { showToast } from "../utils/showToast";
 
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL || "http://localhost:8000",
+  baseURL: "http://localhost:8000",
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
@@ -10,32 +10,41 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-  (config) => config,
+  (config) => {
+    console.log(`Making request to: ${config.url}`);
+    return config;
+  },
   (error) => {
     showToast("error", "ERR_NETWORK");
-    Promise.reject(error);
+    return Promise.reject(error);
   }
 );
 
 axiosInstance.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    return response;
+  },
   (error) => {
     const status = error.response?.status;
-    const message = error.response?.data?.detail || error.message;
-
-    if (status >= 500) {
-      showToast("error", "ERR_SERVER");
-    } else if (status === 404) {
-      showToast("error", "URL_CHECK_FAILED");
-    } else if (status === 400) {
-      showToast("error", "ERR_INVALID_URL");
-    } else if (
-      error.code === "NETWORK_ERROR" ||
-      error.code === "ECONNREFUSED"
-    ) {
-      showToast("error", "ERR_NETWORK");
+    
+    if (error.response?.data?.messages) {
+      const errorMessages = error.response.data.messages;
+      if (errorMessages.length > 0) {
+        const firstError = errorMessages[0];
+        showToast(firstError.type, firstError.code);
+      }
     } else {
-      showToast("error", message || "ERR_URL_CHECK_FAILED");
+      if (status >= 500) {
+        showToast("error", "ERR_SERVER");
+      } else if (status === 404) {
+        showToast("error", "ERR_URL_CHECK_FAILED");
+      } else if (status === 400) {
+        showToast("error", "ERR_INVALID_URL");
+      } else if (error.code === "NETWORK_ERROR" || error.code === "ECONNREFUSED") {
+        showToast("error", "ERR_NETWORK");
+      } else {
+        showToast("error", "ERR_URL_CHECK_FAILED");
+      }
     }
 
     return Promise.reject(error);

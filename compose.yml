@@ -1,10 +1,9 @@
 services:
-
   frontend:
-    container_name: next
+    container_name: react
     build:
       context: ./frontend
-      dockerfile: next.dockerfile
+      dockerfile: dev.dockerfile
     volumes:
       - ./frontend:/app
       - /app/node_modules 
@@ -14,7 +13,7 @@ services:
       - "3000:3000"
     depends_on:
       - backend
-    command: npm run dev
+    command: npm start
 
   backend:
     container_name: backend
@@ -28,28 +27,33 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - DB_HOST=db
     ports:
       - "8000:8000"
     depends_on:
-      - db
-    command: uvicorn main:app --host 0.0.0.0 --reload
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "sleep 10 && uvicorn main:app --host 0.0.0.0 --reload"
 
   db:
     container_name: db
-    image: mysql:latest
+    image: mysql:9.4
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_ALLOW_EMPTY_PASSWORD=0
     ports:
-      - 3306:3306
+      - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
       - ./db:/docker-entrypoint-initdb.d
-      - ./db/whitelist.csv:/var/lib/mysql-files/whitelist.csv
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+      start_period: 30s
 
 volumes:
-  db_data: 
-  
+  db_data:

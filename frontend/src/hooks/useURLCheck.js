@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import { urlService } from "../services/url";
+import { showToast } from "../utils/showToast";
 
 export const useURLCheck = () => {
   const [url, setUrl] = useState("");
@@ -36,18 +38,31 @@ export const useURLCheck = () => {
         domain = url;
       }
 
-      const response = await fetch(
-        `/api/check-url?q=${encodeURIComponent(domain)}`
-      );
+      const response = await urlService.checkURL(domain);
+      const data = response.data;
 
-      if (!response.ok) {
-        throw new Error(`Error: ${response.statusText}`);
+      if (data.messages && data.messages.length > 0) {
+        const firstMessage = data.messages[0];
+        showToast(firstMessage.type, firstMessage.code);
       }
 
-      const data = await response.json();
       setResult(data);
     } catch (error) {
-      setError(error.message);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.messages
+      ) {
+        const errorMessages = error.response.data.messages;
+        if (errorMessages.length > 0) {
+          const firstError = errorMessages[0];
+          setError(firstError.message);
+          showToast(firstError.type, firstError.code);
+        }
+      } else {
+        setError(error.message);
+        showToast("error", "ERR_URL_CHECK_FAILED");
+      }
     } finally {
       setChecking(false);
     }
