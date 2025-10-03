@@ -12,13 +12,10 @@ const Footer = () => {
                 className="hover:text-neutral-700 dark:hover:text-neutral-300 flex items-center"
                 href="/"
               >
-                <img
-                  src="/imgs/logo.png"
-                  className="w-4 h-4"
-                />
+                <img src="/imgs/logo.png" className="w-4 h-4" />
                 LeftClick Sec
               </Link>
-              <p>copyleft 🄯 2024</p>
+              <p>copyleft 🄯 {new Date().getFullYear()}</p>
             </li>
             <li className="sm:border-l sm:border-neutral-300 sm:dark:border-neutral-200/5 sm:pl-4">
               <Link
@@ -46,10 +43,7 @@ const Footer = () => {
             </li>
           </ul>
 
-          <Link
-            href="https://github.com/leidorf/leftclick-sec"
-            target="_blank"
-          >
+          <Link href="https://github.com/leidorf/leftclick-sec" target="_blank">
             <img
               src="/imgs/github-logo.png"
               className="w-4 h-auto invert dark:invert-0"

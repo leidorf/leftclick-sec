@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import PageHead from "./PageHead";
 
 const Layout = ({ children }) => {
-  const [openClass, setOpenClass] = useState("");
-
   return (
     <>
       <div className="flex justify-center">
