@@ -37,32 +37,19 @@ export const useURLCheck = () => {
       } catch (err) {
         domain = url;
       }
-
       const response = await urlService.checkURL(domain);
       const data = response.data;
 
-      if (data.messages && data.messages.length > 0) {
-        const firstMessage = data.messages[0];
-        showToast(firstMessage.type, firstMessage.code);
+      if (data.messages) {
+        showToast(data.messages.type, data.messages.code);
       }
 
       setResult(data);
     } catch (error) {
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.messages
-      ) {
-        const errorMessages = error.response.data.messages;
-        if (errorMessages.length > 0) {
-          const firstError = errorMessages[0];
-          setError(firstError.message);
-          showToast(firstError.type, firstError.code);
-        }
-      } else {
-        setError(error.message);
-        showToast("error", "ERR_URL_CHECK_FAILED");
-      }
+      const errorData = error.response.data.detail;
+
+      setError(errorData.messages.message);
+      showToast(errorData.messages.type, errorData.messages.code);
     } finally {
       setChecking(false);
     }

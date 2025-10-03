@@ -13,9 +13,9 @@
       "URL_WHITELISTED": "URL is in whitelist and considered safe."
     },
     "warning": {
-      "URL_SUSPICIOUS": "URL looks suspicious, be careful.",
-      "URL_MALICIOUS": "URL marked as malicious, do not open!",
-      "URL_BLACKLISTED": "URL is in blacklist and considered suspicious."
+      "URL_SUSPICIOUS": "URL looks suspicious, be cautious.",
+      "URL_MALICIOUS": "URL marked as malicious, avoid visiting!",
+      "URL_BLACKLISTED": "URL is in blacklist and flagged as suspicious."
     }
   }
 }
