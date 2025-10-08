@@ -1,3 +1,4 @@
+# TODO make a prod dockerfile 
 FROM python:3.11-slim
 
 WORKDIR /app

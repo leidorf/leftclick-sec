@@ -2,7 +2,7 @@ import axios from "axios";
 import { showToast } from "../utils/showToast";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: process.env.REACT_APP_API_URL || "/api/v1",
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",

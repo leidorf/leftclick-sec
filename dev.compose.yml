@@ -5,35 +5,45 @@ services:
       dockerfile: dev.dockerfile
     volumes:
       - ./frontend:/app
-      - /app/node_modules 
+      - /app/node_modules
     environment:
-      - NODE_ENV=development 
+      - REACT_APP_API_URL=http://localhost/api/v1
     ports:
       - "3000:3000"
     depends_on:
       - backend
-    command: npm start
+    networks:
+      - leftclick-network
 
   backend:
     build:
       context: ./backend
-      dockerfile: backend.dockerfile
+      dockerfile: dev.dockerfile
     volumes:
       - ./backend:/app
+    env_file:
+      - ./dev.env
     environment:
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - DB_HOST=db
+      - ENVIRONMENT=development
+      - DEBUG=true
     ports:
       - "8000:8000"
     depends_on:
       db:
         condition: service_healthy
-    command: uvicorn main:app --host 0.0.0.0 --reload
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - leftclick-network
 
   db:
     image: mysql:9.4
+    env_file:
+      - ./dev.env
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
@@ -44,11 +54,30 @@ services:
     volumes:
       - db_data:/var/lib/mysql
       - ./db:/docker-entrypoint-initdb.d
+      - ./db/mysql-files:/var/lib/mysql-files
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 20s
       retries: 10
       start_period: 30s
+    networks:
+      - leftclick-network
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: dev.dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - leftclick-network
 
 volumes:
   db_data:
+
+networks:
+  leftclick-network:
+    driver: bridge

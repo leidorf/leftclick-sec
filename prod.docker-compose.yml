@@ -1,10 +1,12 @@
+# FIXME implement it to current project
+
 version: '3.8'
 
 services:
   frontend:
     build:
       context: ./frontend
-      dockerfile: prod.Dockerfile
+      dockerfile: prod.dockerfile
     networks:
       - ctf-network
     restart: always
@@ -12,7 +14,7 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: prod.Dockerfile
+      dockerfile: prod.dockerfile
     depends_on:
       postgres:
        condition: 'service_healthy'
