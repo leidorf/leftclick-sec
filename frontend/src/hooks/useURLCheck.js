@@ -46,10 +46,8 @@ export const useURLCheck = () => {
 
       setResult(data);
     } catch (error) {
-      const errorData = error.response.data.detail;
-
-      setError(errorData.messages.message);
-      showToast(errorData.messages.type, errorData.messages.code);
+      setError(error.message);
+      showToast("error", error.code);
     } finally {
       setChecking(false);
     }

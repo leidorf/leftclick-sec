@@ -5,7 +5,8 @@
       "ERR_NETWORK": "Network error, please check your internet connection.",
       "ERR_SERVER": "Server error, please try again later.",
       "ERR_URL_CHECK_FAILED": "URL check failed.",
-      "ERR_EMPTY_URL": "Please enter an URL."
+      "ERR_EMPTY_URL": "Please enter an URL.",
+      "ERR_BAD_REQUEST": "Bad request, please try again later."
     },
     "success": {
       "URL_SAFE": "URL looks safe.",

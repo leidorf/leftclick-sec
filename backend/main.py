@@ -10,14 +10,10 @@ from services.url_checker import check_url
 from config import MESSAGE_CODES, DATABASE_URL
 
 environment = os.getenv("ENVIRONMENT", "development")
-api_router = APIRouter(prefix="/api/v1")
-
-if environment == "development":
-    origins = ["http://localhost:3000", "http://127.0.0.1:3000", "http://frontend:3000"]
-else:
-    origins = os.getenv("ALLOWED_ORIGINS", "").split(",")
-
+allowed_hosts = os.getenv("ALLOWED_HOSTS", "").split(",")
+origins = os.getenv("ALLOWED_ORIGINS", "").split(",")
 logging.basicConfig(level=logging.INFO)
+api_router = APIRouter()
 app = FastAPI()
 
 app.add_middleware(
@@ -27,11 +23,6 @@ app.add_middleware(
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
-
-if environment == "development":
-    allowed_hosts = ["localhost", "127.0.0.1", "frontend", "backend", "0.0.0.0"]
-else:
-    allowed_hosts = ["leftclicksec.org", "www.leftclicksec.org", "api.leftclicksec.org"]
 
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=allowed_hosts)
 

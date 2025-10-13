@@ -6,10 +6,6 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
-    environment:
-      - REACT_APP_API_URL=http://localhost/api/v1
-    ports:
-      - "3000:3000"
     depends_on:
       - backend
     networks:
@@ -22,12 +18,10 @@ services:
     volumes:
       - ./backend:/app
     env_file:
-      - ./dev.env
+      - ./.env.dev
     environment:
       - ENVIRONMENT=development
       - DEBUG=true
-    ports:
-      - "8000:8000"
     depends_on:
       db:
         condition: service_healthy
@@ -43,14 +37,12 @@ services:
   db:
     image: mysql:9.4
     env_file:
-      - ./dev.env
+      - ./.env.dev
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-    ports:
-      - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
       - ./db:/docker-entrypoint-initdb.d
