@@ -1,6 +1,5 @@
 # dependencies
 __pycache__
-requirements.txt
 node_modules
 /.pnp
 .pnp.js
