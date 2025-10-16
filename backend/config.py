@@ -5,7 +5,7 @@ load_dotenv()
 
 DB_USER = os.getenv("MYSQL_USER", "root")
 DB_PASSWORD = os.getenv("MYSQL_PASSWORD", "password")
-DB_HOST = os.getenv("DB_HOST", "db")
+DB_HOST = os.getenv("MYSQL_HOST", "db")
 DB_NAME = os.getenv("MYSQL_DATABASE", "test_db")
 DATABASE_URL = f"mysql+asyncmy://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
 USOM_API_URL = "https://www.usom.gov.tr/api/address/index"
